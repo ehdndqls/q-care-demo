@@ -18,7 +18,7 @@ public class Hospitals {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long hospitalId;
     // 병원명
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     // 위도
     @Column(nullable = false)
@@ -28,7 +28,9 @@ public class Hospitals {
     private Double longitude;
     // 주말휴진여부
     @Column(nullable = true)
-    private Boolean holidayService;
+    private Boolean holidayService = false;
+    // 비밀번호
+    private String password;
     // 진료분야
     @ElementCollection(targetClass = MedicalSpecialty.class)
     @Enumerated(EnumType.STRING)
