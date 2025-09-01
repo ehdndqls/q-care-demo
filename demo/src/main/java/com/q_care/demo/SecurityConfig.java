@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -23,7 +24,7 @@ class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")           // 공통 로그인 페이지
-                        .defaultSuccessUrl("/login-success") // 로그인 후 리다이렉트
+                        .successHandler(customAuthenticationSuccessHandler()) // 로그인 후 리다이렉트
                         .permitAll()
                 )
                 .logout(logout -> logout
@@ -32,6 +33,22 @@ class SecurityConfig {
                 );
 
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+        return (request, response, authentication) -> {
+            var authorities = authentication.getAuthorities();
+            String redirectUrl = "/login";
+
+            if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_HOSPITAL"))) {
+                redirectUrl = "/hospital";
+            } else if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_PATIENT"))) {
+                redirectUrl = "/patient";
+            }
+
+            response.sendRedirect(redirectUrl);
+        };
     }
 
     @Bean

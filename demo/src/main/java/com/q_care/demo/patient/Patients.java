@@ -15,10 +15,9 @@ public class Patients {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long patientId;
 
-    // 로그인할때 사용할 Id
+    // 로그인할때 사용할 email
     @Column(nullable = false, unique = true)
-    private String Id;
-    private String password;
+    private String email;
     // 생년월일
     @Column(nullable = false)
     private String brithDate;
@@ -28,9 +27,6 @@ public class Patients {
     // 이름
     @Column(nullable = false)
     private String lastName;
-    // 핸드폰 번호
-    @Column(nullable = true)
-    private String phoneNum;
     // 위도
     @Column(nullable = false)
     private Double latitude;
