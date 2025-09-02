@@ -113,10 +113,24 @@
     function toggleMenu() {
         document.getElementById('navMenu').classList.toggle('active');
     }
-    function navigateTo(section) { console.log('Navigating to:', section); toggleMenu(); }
+    function navigateTo(section) {
+        console.log('Navigating to:', section);
+
+        if (section === 'symptoms') {
+            window.location.href = '/patient/symptom';
+        }
+        // 여기에 다른것도 추가
+
+        toggleMenu(); // 기존처럼 메뉴 닫기 유지
+    }
+
     function searchSymptoms() {
         const symptoms = document.getElementById('symptomInput').value.trim();
-        if (symptoms) console.log('Searching for symptoms:', symptoms);
+        if (symptoms) {
+            console.log('Searching for symptoms:', symptoms);
+            // 검색 결과 페이지로 이동할 수도 있음
+            window.location.href = '/patient/symptom';
+        }
     }
 
     // 다국어 번역
@@ -128,6 +142,7 @@
             bookAppointment: "Book Appointment",
             checkAppointments: "Check Appointments",
             history: "Medical History & Prescriptions",
+            hospital: "Nearby Hospital",
             upcomingAppointments: "Upcoming Appointments",
             quickActions: "Quick Actions",
             emergency: "Emergency",
@@ -144,6 +159,7 @@
             bookAppointment: "예약하기",
             checkAppointments: "예약 확인",
             history: "진료 기록 및 처방전",
+            hospital: "근처 병원",
             upcomingAppointments: "다가오는 예약",
             quickActions: "빠른 실행",
             emergency: "응급실",
@@ -160,6 +176,7 @@
             bookAppointment: "予約する",
             checkAppointments: "予約確認",
             history: "診療記録と処方箋",
+            hospital: "近くの病院",
             upcomingAppointments: "今後の予約",
             quickActions: "クイック操作",
             emergency: "救急",
@@ -176,6 +193,7 @@
             bookAppointment: "预约",
             checkAppointments: "查看预约",
             history: "病历与处方",
+            hospital: "附近医院",
             upcomingAppointments: "即将到来的预约",
             quickActions: "快捷操作",
             emergency: "急诊",
@@ -219,6 +237,8 @@
     }
 
     document.addEventListener("DOMContentLoaded", applyTranslations);
+
+
 </script>
 </body>
 </html>

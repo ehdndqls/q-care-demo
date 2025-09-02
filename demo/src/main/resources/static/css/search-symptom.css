@@ -1,0 +1,380 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Source Sans Pro", sans-serif;
+    background-color: #ffffff;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #164e63;
+    cursor: pointer;
+    padding: 8px;
+    margin-right: 16px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.back-btn:hover {
+    background-color: #ecfeff;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-text {
+    font-family: "Playfair Display", serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #164e63;
+}
+
+/* Search Keywords Section */
+.search-keywords {
+    padding: 20px;
+    background: linear-gradient(135deg, #ecfeff 0%, #ffffff 100%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.search-icon {
+    color: #164e63;
+    flex-shrink: 0;
+}
+
+.search-title {
+    font-family: "Playfair Display", serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #164e63;
+    line-height: 1.4;
+}
+
+/* Symptom Summary Card */
+.symptom-summary {
+    padding: 20px;
+}
+
+.summary-card {
+    background-color: #ecfeff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    position: relative;
+}
+
+.severity-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.severity-badge.high {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.summary-title {
+    font-family: "Playfair Display", serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #164e63;
+    margin-bottom: 12px;
+}
+
+.summary-description {
+    color: #475569;
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+.confidence-score {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.confidence-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.confidence-bar {
+    flex: 1;
+    height: 8px;
+    background-color: #f3f4f6;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.confidence-fill {
+    height: 100%;
+    background-color: #f59e0b;
+    transition: width 0.3s ease;
+}
+
+.confidence-percentage {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f59e0b;
+}
+
+/* Section Titles */
+.section-title {
+    font-family: "Playfair Display", serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #164e63;
+    margin-bottom: 16px;
+    padding: 0 20px;
+}
+
+/* Detailed Symptoms */
+.detailed-symptoms {
+    padding: 20px 0;
+}
+
+.symptom-item {
+    margin: 0 20px 12px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.symptom-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.symptom-header:hover {
+    background-color: #f8fafc;
+}
+
+.symptom-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.symptom-name {
+    font-weight: 600;
+    color: #164e63;
+}
+
+.symptom-severity {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    align-self: flex-start;
+}
+
+.symptom-severity.moderate {
+    background-color: #fef3c7;
+    color: #d97706;
+}
+
+.symptom-severity.high {
+    background-color: #fef2f2;
+    color: #dc2626;
+}
+
+.expand-icon {
+    color: #6b7280;
+    transition: transform 0.2s;
+}
+
+.symptom-details {
+    display: none;
+    padding: 0 16px 16px;
+    border-top: 1px solid #f3f4f6;
+    background-color: #f8fafc;
+}
+
+.symptom-details p {
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.symptom-details strong {
+    color: #164e63;
+}
+
+/* Affected Area Visualization */
+.affected-area {
+    padding: 20px 0;
+    background-color: #f8fafc;
+}
+
+.body-diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.body-outline {
+    margin-bottom: 20px;
+}
+
+.human-body {
+    max-width: 100%;
+    height: auto;
+}
+
+.affected-area-highlight {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.area-legend {
+    display: flex;
+    gap: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1px solid #e5e7eb;
+}
+
+.legend-color.affected {
+    background-color: #f59e0b;
+}
+
+.legend-color.normal {
+    background-color: #ecfeff;
+}
+
+/* Action Buttons */
+.action-buttons {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-height: 52px;
+}
+
+.btn-primary {
+    background-color: #164e63;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #0f3a47;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: #ffffff;
+    color: #164e63;
+    border: 2px solid #164e63;
+}
+
+.btn-secondary:hover {
+    background-color: #ecfeff;
+    transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .container {
+        max-width: 100%;
+    }
+
+    .search-title {
+        font-size: 16px;
+    }
+
+    .summary-title {
+        font-size: 18px;
+    }
+
+    .confidence-score {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .confidence-bar {
+        width: 100%;
+    }
+}

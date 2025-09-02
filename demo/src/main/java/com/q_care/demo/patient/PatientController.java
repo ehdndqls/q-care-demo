@@ -29,5 +29,16 @@ public class PatientController {
         return "patient-main.html";
     }
 
+    @GetMapping("/patient/symptom")
+    public String symptoms(Authentication auth) {
+        String lang = patientsService.getLang(auth.getName());
+        return "redirect:/patient/symptom-dashboard?lang=" + lang;
+    }
+
+    @GetMapping("/patient/symptom-dashboard")
+    public String symptomDashboard() {
+        return "search-symptom.html";
+    }
+
 
 }

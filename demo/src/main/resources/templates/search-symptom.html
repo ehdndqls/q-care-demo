@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Symptom Search Results - Q-Care</title>
+  <link rel="stylesheet" href="/css/search-symptom.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* 간단한 기본 스타일 추가 (필요 시 CSS 파일로 대체) */
+    .symptom-details { display: none; margin-left: 10px; }
+    .high { color: red; }
+    .moderate { color: orange; }
+    .btn { margin: 5px; padding: 5px 10px; cursor: pointer; }
+    .human-body-svg { width: 100%; height: auto; }
+    .body-part { cursor: pointer; }
+    .body-label { font-size: 12px; }
+    .severity-indicators { margin-top: 20px; }
+    .indicator { display: inline-block; margin-right: 10px; }
+    .indicator-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+    .high-severity .indicator-dot { background-color: red; }
+    .moderate-severity .indicator-dot { background-color: orange; }
+    .normal .indicator-dot { background-color: green; }
+    .fever-indicator { color: #ff4444; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- Header -->
+  <header class="header">
+    <button class="back-btn" onclick="history.back()">
+      ← Back
+    </button>
+    <div class="logo">
+      Q-care
+    </div>
+  </header>
+
+  <!-- Search Keywords Section -->
+  <section class="search-keywords">
+    <h1 class="search-title">Search Results</h1>
+  </section>
+
+  <!-- Symptom Summary Card -->
+  <section class="symptom-summary">
+    <div class="summary-card">
+      <div class="severity-badge high" id="summary-severity">High Priority</div>
+      <h2 class="summary-title" id="summary-title">Summary Title</h2>
+      <p class="summary-description" id="summary-description">Summary description here.</p>
+      <div class="confidence-score">
+        <span class="confidence-label" id="match-confidence">Match Confidence:</span>
+        <div class="confidence-bar">
+          <div class="confidence-fill" style="width: 85%"></div>
+        </div>
+        <span class="confidence-percentage">85%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Symptoms -->
+  <section class="detailed-symptoms">
+    <h3 class="section-title" id="detailed-title">Detailed Symptoms Analysis</h3>
+
+    <div class="symptom-item">
+      <div class="symptom-header" onclick="toggleSymptom('headache')">
+        <div class="symptom-info">
+          <span class="symptom-name" id="headache-name">Headache</span>
+          <span class="symptom-severity moderate" id="headache-severity">Moderate</span>
+        </div>
+      </div>
+      <div class="symptom-details" id="headache">
+        <p id="headache-causes"><strong>Common Causes:</strong> Causes</p>
+        <p id="headache-when"><strong>When to Worry:</strong> Info</p>
+        <p id="headache-selfcare"><strong>Self-Care:</strong> Info</p>
+      </div>
+    </div>
+
+    <div class="symptom-item">
+      <div class="symptom-header" onclick="toggleSymptom('fever')">
+        <div class="symptom-info">
+          <span class="symptom-name" id="fever-name">Fever</span>
+          <span class="symptom-severity high" id="fever-severity">High</span>
+        </div>
+      </div>
+      <div class="symptom-details" id="fever">
+        <p id="fever-causes"><strong>Common Causes:</strong> Causes</p>
+        <p id="fever-when"><strong>When to Worry:</strong> Info</p>
+        <p id="fever-selfcare"><strong>Self-Care:</strong> Info</p>
+      </div>
+    </div>
+
+    <div class="symptom-item">
+      <div class="symptom-header" onclick="toggleSymptom('fatigue')">
+        <div class="symptom-info">
+          <span class="symptom-name" id="fatigue-name">Fatigue</span>
+          <span class="symptom-severity moderate" id="fatigue-severity">Moderate</span>
+        </div>
+      </div>
+      <div class="symptom-details" id="fatigue">
+        <p id="fatigue-causes"><strong>Common Causes:</strong> Causes</p>
+        <p id="fatigue-when"><strong>When to Worry:</strong> Info</p>
+        <p id="fatigue-selfcare"><strong>Self-Care:</strong> Info</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Affected Area Visualization -->
+  <section class="affected-area">
+    <h3 class="section-title" id="affected-title">Affected Body Areas</h3>
+    <div class="body-diagram">
+      <div class="body-visualization">
+        <svg viewBox="0 0 300 500" class="human-body-svg">
+          <!-- Head -->
+          <circle cx="150" cy="60" r="35" class="body-part affected" data-part="head" onclick="highlightArea('head')" />
+          <text x="150" y="65" text-anchor="middle" class="body-label">Head</text>
+
+          <!-- Neck -->
+          <rect x="140" y="90" width="20" height="25" class="body-part normal" data-part="neck" onclick="highlightArea('neck')" />
+
+          <!-- Chest/Torso -->
+          <ellipse cx="150" cy="160" rx="45" ry="60" class="body-part affected" data-part="chest" onclick="highlightArea('chest')" />
+          <text x="150" y="165" text-anchor="middle" class="body-label">Chest</text>
+
+          <!-- Arms -->
+          <ellipse cx="100" cy="140" rx="15" ry="40" class="body-part normal" data-part="left-arm" onclick="highlightArea('left-arm')" />
+          <ellipse cx="200" cy="140" rx="15" ry="40" class="body-part normal" data-part="right-arm" onclick="highlightArea('right-arm')" />
+
+          <!-- Abdomen -->
+          <ellipse cx="150" cy="240" rx="35" ry="30" class="body-part normal" data-part="abdomen" onclick="highlightArea('abdomen')" />
+
+          <!-- Legs -->
+          <ellipse cx="130" cy="340" rx="18" ry="70" class="body-part normal" data-part="left-leg" onclick="highlightArea('left-leg')" />
+          <ellipse cx="170" cy="340" rx="18" ry="70" class="body-part normal" data-part="right-leg" onclick="highlightArea('right-leg')" />
+
+          <!-- Temperature indicator for fever -->
+          <g class="temperature-indicator">
+            <rect x="200" y="50" width="8" height="30" fill="#ff4444" class="thermometer" />
+            <circle cx="204" cy="85" r="6" fill="#ff4444" />
+            <text x="220" y="70" class="temp-text">38.5°C</text>
+          </g>
+
+          <!-- Pain indicators -->
+          <g class="pain-indicators">
+            <!-- Head pain waves -->
+            <path d="M 120 40 Q 135 30 150 40 Q 165 30 180 40" stroke="#ff6b6b" stroke-width="2" fill="none" class="pain-wave" />
+            <path d="M 125 45 Q 140 35 155 45 Q 170 35 185 45" stroke="#ff6b6b" stroke-width="2" fill="none" class="pain-wave" />
+          </g>
+        </svg>
+
+        <!-- Symptom severity indicators -->
+        <div class="severity-indicators">
+          <div class="indicator high-severity">
+            <div class="indicator-dot"></div>
+            <span>High Priority Areas</span>
+          </div>
+          <div class="indicator moderate-severity">
+            <div class="indicator-dot"></div>
+            <span>Moderate Concern</span>
+          </div>
+          <div class="indicator normal">
+            <div class="indicator-dot"></div>
+            <span>Normal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <span id="legend-affected">🔴 Affected Area</span> |
+        <span id="legend-normal">⚪ Normal</span> |
+        <span class="fever-indicator">🌡️ Fever Detected</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Action Buttons -->
+  <section class="action-buttons">
+    <button class="btn btn-secondary" id="search-other-btn">Search Other Symptoms</button>
+    <button class="btn btn-primary" id="find-hospitals-btn">Find Nearby Hospitals</button>
+  </section>
+</div>
+
+<script>
+  // 다국어 텍스트
+  const translations = {
+    ENGLISH: {
+      searchResultsTitle: 'Search Results for: "{keywords}"',
+      symptomSummaryTitle: 'Possible Flu or Viral Infection',
+      symptomSummaryDescription: 'Your symptoms suggest a common viral infection or flu. The combination of headache, fever, and fatigue are typical signs of your body fighting an infection.',
+      matchConfidence: 'Match Confidence:',
+      detailedSymptomsTitle: 'Detailed Symptoms Analysis',
+      headacheName: 'Headache',
+      headacheSeverity: 'Moderate',
+      headacheCauses: 'Tension, dehydration, viral infections, stress',
+      headacheWhen: 'Sudden severe headache, headache with fever and stiff neck',
+      headacheSelfCare: 'Rest, hydration, over-the-counter pain relievers',
+      feverName: 'Fever (38.5°C / 101.3°F)',
+      feverSeverity: 'High',
+      feverCauses: 'Viral or bacterial infections, immune response',
+      feverWhen: 'Fever above 39.4°C (103°F), persistent for more than 3 days',
+      feverSelfCare: 'Rest, fluids, fever reducers, cool compresses',
+      fatigueName: 'Fatigue',
+      fatigueSeverity: 'Moderate',
+      fatigueCauses: 'Viral infections, lack of sleep, dehydration, stress',
+      fatigueWhen: 'Extreme fatigue lasting more than 2 weeks',
+      fatigueSelfCare: 'Adequate rest, balanced nutrition, gradual activity increase',
+      affectedAreasTitle: 'Affected Body Areas',
+      affectedLegend: 'Affected Area',
+      normalLegend: 'Normal',
+      searchOtherBtn: 'Search Other Symptoms',
+      findHospitalsBtn: 'Find Nearby Hospitals'
+    },
+    KOREAN: {
+      searchResultsTitle: '"{keywords}" 검색 결과',
+      symptomSummaryTitle: '독감 또는 바이러스 감염 가능성',
+      symptomSummaryDescription: '증상으로 보아 일반적인 바이러스 감염이나 독감일 가능성이 있습니다. 두통, 발열, 피로가 나타나는 것은 몸이 감염과 싸우고 있다는 일반적인 신호입니다.',
+      matchConfidence: '일치 확률:',
+      detailedSymptomsTitle: '상세 증상 분석',
+      headacheName: '두통',
+      headacheSeverity: '보통',
+      headacheCauses: '긴장, 탈수, 바이러스 감염, 스트레스',
+      headacheWhen: '갑작스러운 심한 두통, 발열과 경부 경직 동반',
+      headacheSelfCare: '휴식, 수분 섭취, 일반 진통제',
+      feverName: '발열 (38.5°C)',
+      feverSeverity: '높음',
+      feverCauses: '바이러스 또는 세균 감염, 면역 반응',
+      feverWhen: '39.4°C 이상 지속, 3일 이상 지속',
+      feverSelfCare: '휴식, 수분 섭취, 해열제, 냉찜질',
+      fatigueName: '피로',
+      fatigueSeverity: '보통',
+      fatigueCauses: '바이러스 감염, 수면 부족, 탈수, 스트레스',
+      fatigueWhen: '2주 이상 지속되는 극심한 피로',
+      fatigueSelfCare: '충분한 휴식, 균형 잡힌 영양, 점진적 활동 증가',
+      affectedAreasTitle: '영향받는 부위',
+      affectedLegend: '영향받는 부위',
+      normalLegend: '정상',
+      searchOtherBtn: '다른 증상 검색',
+      findHospitalsBtn: '근처 병원 찾기'
+    },
+    JAPANESE: {
+      searchResultsTitle: '"{keywords}" の検索結果',
+      symptomSummaryTitle: 'インフルエンザまたはウイルス感染の可能性',
+      symptomSummaryDescription: '症状は一般的なウイルス感染やインフルエンザを示唆しています。頭痛、発熱、疲労は、体が感染と戦っている典型的なサインです。',
+      matchConfidence: '一致の信頼度:',
+      detailedSymptomsTitle: '詳細症状分析',
+      headacheName: '頭痛',
+      headacheSeverity: '中程度',
+      headacheCauses: '緊張、脱水、ウイルス感染、ストレス',
+      headacheWhen: '突然の激しい頭痛、発熱と首のこわばりを伴う頭痛',
+      headacheSelfCare: '休息、水分補給、一般的な鎮痛薬',
+      feverName: '発熱 (38.5°C)',
+      feverSeverity: '高',
+      feverCauses: 'ウイルスまたは細菌感染、免疫反応',
+      feverWhen: '39.4°C以上、3日以上持続',
+      feverSelfCare: '休息、水分補給、解熱剤、冷湿布',
+      fatigueName: '疲労',
+      fatigueSeverity: '中程度',
+      fatigueCauses: 'ウイルス感染、睡眠不足、脱水、ストレス',
+      fatigueWhen: '2週間以上続く極度の疲労',
+      fatigueSelfCare: '十分な休息、バランスの取れた栄養、段階的な活動増加',
+      affectedAreasTitle: '影響を受ける部位',
+      affectedLegend: '影響部位',
+      normalLegend: '正常',
+      searchOtherBtn: '他の症状を検索',
+      findHospitalsBtn: '近くの病院を探す'
+    },
+    CHINESE: {
+      searchResultsTitle: '"{keywords}" 搜索结果',
+      symptomSummaryTitle: '可能的流感或病毒感染',
+      symptomSummaryDescription: '您的症状可能是普通病毒感染或流感。头痛、发热和疲劳的组合是身体对抗感染的典型信号。',
+      matchConfidence: '匹配置信度:',
+      detailedSymptomsTitle: '详细症状分析',
+      headacheName: '头痛',
+      headacheSeverity: '中等',
+      headacheCauses: '紧张、脱水、病毒感染、压力',
+      headacheWhen: '突然严重头痛，伴随发热和颈部僵硬',
+      headacheSelfCare: '休息、补水、非处方止痛药',
+      feverName: '发热 (38.5°C)',
+      feverSeverity: '高',
+      feverCauses: '病毒或细菌感染，免疫反应',
+      feverWhen: '39.4°C以上，持续超过3天',
+      feverSelfCare: '休息、补水、退烧药、冷敷',
+      fatigueName: '疲劳',
+      fatigueSeverity: '中等',
+      fatigueCauses: '病毒感染、睡眠不足、脱水、压力',
+      fatigueWhen: '持续超过2周的极度疲劳',
+      fatigueSelfCare: '充足休息、均衡饮食、逐步增加活动',
+      affectedAreasTitle: '影响部位',
+      affectedLegend: '影响区域',
+      normalLegend: '正常',
+      searchOtherBtn: '搜索其他症状',
+      findHospitalsBtn: '查找附近医院'
+    }
+  };
+
+  function getLang() {
+    return new URLSearchParams(window.location.search).get("lang")?.toUpperCase() || "ENGLISH";
+  }
+
+  function applyTranslations(keywords = 'Headache, Fever, Fatigue') {
+    const lang = getLang();
+    const t = translations[lang] || translations.ENGLISH;
+
+    document.querySelector('.search-title').textContent = t.searchResultsTitle.replace('{keywords}', keywords);
+    document.getElementById('summary-title').textContent = t.symptomSummaryTitle;
+    document.getElementById('summary-description').textContent = t.symptomSummaryDescription;
+    document.getElementById('match-confidence').textContent = t.matchConfidence;
+    document.getElementById('detailed-title').textContent = t.detailedSymptomsTitle;
+
+    document.getElementById('headache-name').textContent = t.headacheName;
+    document.getElementById('headache-severity').textContent = t.headacheSeverity;
+    document.getElementById('headache-causes').innerHTML = `<strong>Common Causes:</strong> ${t.headacheCauses}`;
+    document.getElementById('headache-when').innerHTML = `<strong>When to Worry:</strong> ${t.headacheWhen}`;
+    document.getElementById('headache-selfcare').innerHTML = `<strong>Self-Care:</strong> ${t.headacheSelfCare}`;
+
+    document.getElementById('fever-name').textContent = t.feverName;
+    document.getElementById('fever-severity').textContent = t.feverSeverity;
+    document.getElementById('fever-causes').innerHTML = `<strong>Common Causes:</strong> ${t.feverCauses}`;
+    document.getElementById('fever-when').innerHTML = `<strong>When to Worry:</strong> ${t.feverWhen}`;
+    document.getElementById('fever-selfcare').innerHTML = `<strong>Self-Care:</strong> ${t.feverSelfCare}`;
+
+    document.getElementById('fatigue-name').textContent = t.fatigueName;
+    document.getElementById('fatigue-severity').textContent = t.fatigueSeverity;
+    document.getElementById('fatigue-causes').innerHTML = `<strong>Common Causes:</strong> ${t.fatigueCauses}`;
+    document.getElementById('fatigue-when').innerHTML = `<strong>When to Worry:</strong> ${t.fatigueWhen}`;
+    document.getElementById('fatigue-selfcare').innerHTML = `<strong>Self-Care:</strong> ${t.fatigueSelfCare}`;
+
+    document.getElementById('affected-title').textContent = t.affectedAreasTitle;
+    document.getElementById('legend-affected').textContent = t.affectedLegend;
+    document.getElementById('legend-normal').textContent = t.normalLegend;
+
+    document.getElementById('search-other-btn').textContent = t.searchOtherBtn;
+    document.getElementById('find-hospitals-btn').textContent = t.findHospitalsBtn;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    applyTranslations(); // 검색 키워드는 필요하면 동적으로 넣을 수 있음
+  });
+
+  function toggleSymptom(symptomId) {
+    const details = document.getElementById(symptomId);
+    details.style.display = details.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function highlightArea(areaId) {
+    const areas = document.querySelectorAll('.body-part');
+    areas.forEach(area => {
+      if (area.dataset.part === areaId) {
+        area.classList.toggle('highlight');
+      } else {
+        area.classList.remove('highlight');
+      }
+    });
+  }
+</script>
+</body>
+</html>
