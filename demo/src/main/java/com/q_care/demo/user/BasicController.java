@@ -1,4 +1,4 @@
-package com.q_care.demo;
+package com.q_care.demo.user;
 
 import com.q_care.demo.patient.PatientsForm;
 import com.q_care.demo.patient.PatientsRepository;
