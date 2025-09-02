@@ -27,6 +27,9 @@ public class Patients {
     // 이름
     @Column(nullable = false)
     private String lastName;
+    // 연락처
+    @Column(nullable = true)
+    private String phoneNum;
     // 위도
     @Column(nullable = false)
     private Double latitude;

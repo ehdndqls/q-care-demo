@@ -8,10 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -53,15 +50,16 @@ public class BasicController {
 
     @PostMapping("/request-join")
     @ResponseBody
-    public ResponseEntity<?> requestJoin(@RequestParam PatientsForm patientsForm) {
-        // 사용자가 입력한 정보가 알맞은 형식이면 회원가입 완료
+    public ResponseEntity<?> requestJoin(@RequestBody PatientsForm patientsForm) {
         try {
             // 비밀번호 일치 확인
             if (!patientsForm.getPassword().equals(patientsForm.getConfirmPassword())) {
-                return ResponseEntity.badRequest().body(Map.of("errorMessage", "비밀번호가 일치하지 않습니다."));
+                return ResponseEntity.badRequest()
+                        .body(Map.of("errorMessage", "비밀번호가 일치하지 않습니다."));
             }
 
-            // 회원가입 처리 (DB 저장 등)
+            System.out.println("Received Patient Form: " + patientsForm);
+            // 회원가입 처리
             patientsService.savePatient(patientsForm);
 
             return ResponseEntity.ok().build();  // 성공 시 200 OK 반환
@@ -69,7 +67,8 @@ public class BasicController {
             return ResponseEntity.badRequest().body(Map.of("errorMessage", e.getMessage()));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Map.of("errorMessage", "등록 중 오류 발생"));
+                    .body(Map.of("errorMessage", "등록 중 오류 발생" + e.getMessage()));
         }
     }
+
 }

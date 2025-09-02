@@ -28,8 +28,10 @@ public class PatientsService {
         patient.setFirstName(patientsForm.getFirstName());
         patient.setLastName(patientsForm.getLastName());
         patient.setBrithDate(patientsForm.getBrithDate());
+        patient.setPhoneNum(patientsForm.getPhoneNum());
         patient.setLatitude(patientsForm.getLatitude());
         patient.setLongitude(patientsForm.getLongitude());
+        patient.setLanguage(patientsForm.getLanguage());
         patientsRepository.save(patient);
 
         // User 저장
