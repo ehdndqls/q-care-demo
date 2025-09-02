@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-translate="pageTitle">Medical Records & Prescription</title>
+  <link rel="stylesheet" href="/css/prescription.css">
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+  <div class="header-content">
+    <button class="back-btn" onclick="history.back()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <div class="logo">
+      <svg width="32" height="32" viewBox="0 0 100 100">
+        <path d="M50 10 C30 10, 15 25, 15 45 C15 65, 30 80, 50 80 C70 80, 85 65, 85 45 C85 25, 70 10, 50 10 Z" fill="#10b981"/>
+        <text x="50" y="55" text-anchor="middle" fill="white" font-size="24" font-weight="bold">Q</text>
+      </svg>
+      <span>Q-care</span>
+    </div>
+    <div class="language-selector">
+      <select id="languageSelect" onchange="changeLanguage(this.value)">
+        <option value="ENGLISH">English</option>
+        <option value="KOREAN">한국어</option>
+        <option value="JAPANESE">日本語</option>
+        <option value="CHINESE">中文</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="main-content">
+  <div class="page-header">
+    <h1 data-translate="medicalRecords">Medical Records & Prescription</h1>
+    <p data-translate="recordsSubtitle">Complete medical history and current prescriptions</p>
+  </div>
+
+  <!-- Patient Info Card -->
+  <div class="info-card">
+    <div class="card-header">
+      <h2 data-translate="patientInfo">Patient Information</h2>
+    </div>
+    <div class="patient-details">
+      <div class="detail-row">
+        <span class="label" data-translate="patientName">Patient Name:</span>
+        <span class="value">John Smith</span>
+      </div>
+      <div class="detail-row">
+        <span class="label" data-translate="patientId">Patient ID:</span>
+        <span class="value">P-2024-001</span>
+      </div>
+      <div class="detail-row">
+        <span class="label" data-translate="birthDate">Birth Date:</span>
+        <span class="value">1990-05-15</span>
+      </div>
+      <div class="detail-row">
+        <span class="label" data-translate="nationality">Nationality:</span>
+        <span class="value">United States</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Latest Visit -->
+  <div class="info-card">
+    <div class="card-header">
+      <h2 data-translate="latestVisit">Latest Visit</h2>
+      <span class="visit-date">2024-01-15</span>
+    </div>
+    <div class="visit-details">
+      <div class="detail-row">
+        <span class="label" data-translate="hospital">Hospital:</span>
+        <span class="value">Seoul National University Hospital</span>
+      </div>
+      <div class="detail-row">
+        <span class="label" data-translate="department">Department:</span>
+        <span class="value" data-translate="internalMedicine">Internal Medicine</span>
+      </div>
+      <div class="detail-row">
+        <span class="label" data-translate="doctor">Doctor:</span>
+        <span class="value">Dr. Kim Min-jun</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Diagnosis -->
+  <div class="info-card">
+    <div class="card-header">
+      <h2 data-translate="diagnosis">Diagnosis</h2>
+      <span class="severity-badge moderate" data-translate="moderate">Moderate</span>
+    </div>
+    <div class="diagnosis-content">
+      <h3 data-translate="primaryDiagnosis">Primary Diagnosis</h3>
+      <p class="diagnosis-name" data-translate="acuteGastritis">Acute Gastritis (K29.0)</p>
+
+      <h4 data-translate="symptoms">Symptoms</h4>
+      <ul class="symptoms-list">
+        <li data-translate="stomachPain">Stomach pain and discomfort</li>
+        <li data-translate="nausea">Nausea and vomiting</li>
+        <li data-translate="bloating">Abdominal bloating</li>
+        <li data-translate="lossOfAppetite">Loss of appetite</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Current Prescriptions -->
+  <div class="info-card">
+    <div class="card-header">
+      <h2 data-translate="currentPrescriptions">Current Prescriptions</h2>
+      <span class="prescription-count">3 <span data-translate="medications">medications</span></span>
+    </div>
+    <div class="prescriptions-list">
+      <div class="prescription-item">
+        <div class="medication-icon">💊</div>
+        <div class="medication-details">
+          <h4>Omeprazole 20mg</h4>
+          <p class="dosage" data-translate="omeprazoleDosage">Take 1 tablet daily before breakfast</p>
+          <p class="duration" data-translate="duration14Days">Duration: 14 days</p>
+        </div>
+      </div>
+      <div class="prescription-item">
+        <div class="medication-icon">🧪</div>
+        <div class="medication-details">
+          <h4>Domperidone 10mg</h4>
+          <p class="dosage" data-translate="domperidoneDosage">Take 1 tablet 3 times daily before meals</p>
+          <p class="duration" data-translate="duration7Days">Duration: 7 days</p>
+        </div>
+      </div>
+      <div class="prescription-item">
+        <div class="medication-icon">🌿</div>
+        <div class="medication-details">
+          <h4>Probiotics</h4>
+          <p class="dosage" data-translate="probioticsDosage">Take 1 capsule twice daily after meals</p>
+          <p class="duration" data-translate="duration30Days">Duration: 30 days</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Doctor's Notes -->
+  <div class="info-card">
+    <div class="card-header">
+      <h2 data-translate="doctorNotes">Doctor's Notes</h2>
+    </div>
+    <div class="notes-content">
+      <p data-translate="doctorNotesContent">Patient shows improvement in gastric symptoms. Continue current medication regimen. Recommend dietary modifications: avoid spicy foods, alcohol, and NSAIDs. Follow up in 2 weeks if symptoms persist.</p>
+    </div>
+  </div>
+
+  <!-- Next Appointment -->
+  <div class="info-card">
+    <div class="card-header">
+      <h2 data-translate="nextAppointment">Next Appointment</h2>
+    </div>
+    <div class="appointment-details">
+      <div class="appointment-date">
+        <span class="date">2024-01-29</span>
+        <span class="time">10:00 AM</span>
+      </div>
+      <div class="appointment-info">
+        <p><strong data-translate="followUpVisit">Follow-up Visit</strong></p>
+        <p data-translate="appointmentLocation">Seoul National University Hospital - Internal Medicine</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-buttons">
+    <button class="btn btn-secondary" data-translate="downloadPdf">Download PDF</button>
+    <button class="btn btn-primary" data-translate="shareRecord">Share Record</button>
+  </div>
+</main>
+
+<script>
+  // Translation object
+  const translations = {
+    ENGLISH: {
+      pageTitle: "Medical Records & Prescription",
+      medicalRecords: "Medical Records & Prescription",
+      recordsSubtitle: "Complete medical history and current prescriptions",
+      patientInfo: "Patient Information",
+      patientName: "Patient Name:",
+      patientId: "Patient ID:",
+      birthDate: "Birth Date:",
+      nationality: "Nationality:",
+      latestVisit: "Latest Visit",
+      hospital: "Hospital:",
+      department: "Department:",
+      doctor: "Doctor:",
+      internalMedicine: "Internal Medicine",
+      diagnosis: "Diagnosis",
+      moderate: "Moderate",
+      primaryDiagnosis: "Primary Diagnosis",
+      acuteGastritis: "Acute Gastritis (K29.0)",
+      symptoms: "Symptoms",
+      stomachPain: "Stomach pain and discomfort",
+      nausea: "Nausea and vomiting",
+      bloating: "Abdominal bloating",
+      lossOfAppetite: "Loss of appetite",
+      currentPrescriptions: "Current Prescriptions",
+      medications: "medications",
+      omeprazoleDosage: "Take 1 tablet daily before breakfast",
+      duration14Days: "Duration: 14 days",
+      domperidoneDosage: "Take 1 tablet 3 times daily before meals",
+      duration7Days: "Duration: 7 days",
+      probioticsDosage: "Take 1 capsule twice daily after meals",
+      duration30Days: "Duration: 30 days",
+      doctorNotes: "Doctor's Notes",
+      doctorNotesContent: "Patient shows improvement in gastric symptoms. Continue current medication regimen. Recommend dietary modifications: avoid spicy foods, alcohol, and NSAIDs. Follow up in 2 weeks if symptoms persist.",
+      nextAppointment: "Next Appointment",
+      followUpVisit: "Follow-up Visit",
+      appointmentLocation: "Seoul National University Hospital - Internal Medicine",
+      downloadPdf: "Download PDF",
+      shareRecord: "Share Record"
+    },
+    KOREAN: {
+      pageTitle: "진료기록 및 처방전",
+      medicalRecords: "진료기록 및 처방전",
+      recordsSubtitle: "완전한 의료 기록 및 현재 처방전",
+      patientInfo: "환자 정보",
+      patientName: "환자명:",
+      patientId: "환자번호:",
+      birthDate: "생년월일:",
+      nationality: "국적:",
+      latestVisit: "최근 진료",
+      hospital: "병원:",
+      department: "진료과:",
+      doctor: "담당의:",
+      internalMedicine: "내과",
+      diagnosis: "진단",
+      moderate: "보통",
+      primaryDiagnosis: "주 진단",
+      acuteGastritis: "급성 위염 (K29.0)",
+      symptoms: "증상",
+      stomachPain: "위 통증 및 불편감",
+      nausea: "메스꺼움 및 구토",
+      bloating: "복부 팽만감",
+      lossOfAppetite: "식욕 부진",
+      currentPrescriptions: "현재 처방약",
+      medications: "약물",
+      omeprazoleDosage: "아침 식사 전 1일 1정 복용",
+      duration14Days: "복용기간: 14일",
+      domperidoneDosage: "식사 전 1일 3회 1정씩 복용",
+      duration7Days: "복용기간: 7일",
+      probioticsDosage: "식사 후 1일 2회 1캡슐씩 복용",
+      duration30Days: "복용기간: 30일",
+      doctorNotes: "의사 소견",
+      doctorNotesContent: "환자의 위장 증상이 호전되고 있습니다. 현재 약물 치료를 지속하세요. 식이 조절 권장: 매운 음식, 알코올, 소염진통제 피하기. 증상이 지속되면 2주 후 재진료 받으세요.",
+      nextAppointment: "다음 예약",
+      followUpVisit: "추적 진료",
+      appointmentLocation: "서울대학교병원 - 내과",
+      downloadPdf: "PDF 다운로드",
+      shareRecord: "기록 공유"
+    },
+    JAPANESE: {
+      pageTitle: "診療記録・処方箋",
+      medicalRecords: "診療記録・処方箋",
+      recordsSubtitle: "完全な医療記録と現在の処方箋",
+      patientInfo: "患者情報",
+      patientName: "患者名:",
+      patientId: "患者番号:",
+      birthDate: "生年月日:",
+      nationality: "国籍:",
+      latestVisit: "最新の診療",
+      hospital: "病院:",
+      department: "診療科:",
+      doctor: "担当医:",
+      internalMedicine: "内科",
+      diagnosis: "診断",
+      moderate: "中程度",
+      primaryDiagnosis: "主診断",
+      acuteGastritis: "急性胃炎 (K29.0)",
+      symptoms: "症状",
+      stomachPain: "胃の痛みと不快感",
+      nausea: "吐き気と嘔吐",
+      bloating: "腹部膨満感",
+      lossOfAppetite: "食欲不振",
+      currentPrescriptions: "現在の処方薬",
+      medications: "薬剤",
+      omeprazoleDosage: "朝食前に1日1錠服用",
+      duration14Days: "服用期間: 14日間",
+      domperidoneDosage: "食前に1日3回1錠ずつ服用",
+      duration7Days: "服用期間: 7日間",
+      probioticsDosage: "食後に1日2回1カプセルずつ服用",
+      duration30Days: "服用期間: 30日間",
+      doctorNotes: "医師所見",
+      doctorNotesContent: "患者の胃腸症状は改善しています。現在の薬物療法を継続してください。食事療法の推奨：辛い食べ物、アルコール、NSAIDsを避ける。症状が持続する場合は2週間後に再診してください。",
+      nextAppointment: "次回予約",
+      followUpVisit: "フォローアップ診療",
+      appointmentLocation: "ソウル大学病院 - 内科",
+      downloadPdf: "PDF ダウンロード",
+      shareRecord: "記録を共有"
+    },
+    CHINESE: {
+      pageTitle: "医疗记录和处方",
+      medicalRecords: "医疗记录和处方",
+      recordsSubtitle: "完整的医疗记录和当前处方",
+      patientInfo: "患者信息",
+      patientName: "患者姓名:",
+      patientId: "患者编号:",
+      birthDate: "出生日期:",
+      nationality: "国籍:",
+      latestVisit: "最近就诊",
+      hospital: "医院:",
+      department: "科室:",
+      doctor: "主治医生:",
+      internalMedicine: "内科",
+      diagnosis: "诊断",
+      moderate: "中度",
+      primaryDiagnosis: "主要诊断",
+      acuteGastritis: "急性胃炎 (K29.0)",
+      symptoms: "症状",
+      stomachPain: "胃痛和不适",
+      nausea: "恶心和呕吐",
+      bloating: "腹胀",
+      lossOfAppetite: "食欲不振",
+      currentPrescriptions: "当前处方药",
+      medications: "药物",
+      omeprazoleDosage: "早餐前每日1片",
+      duration14Days: "疗程: 14天",
+      domperidoneDosage: "餐前每日3次，每次1片",
+      duration7Days: "疗程: 7天",
+      probioticsDosage: "餐后每日2次，每次1粒",
+      duration30Days: "疗程: 30天",
+      doctorNotes: "医生备注",
+      doctorNotesContent: "患者胃部症状有所改善。继续当前药物治疗方案。建议饮食调整：避免辛辣食物、酒精和非甾体抗炎药。如症状持续，请2周后复诊。",
+      nextAppointment: "下次预约",
+      followUpVisit: "复诊",
+      appointmentLocation: "首尔大学医院 - 内科",
+      downloadPdf: "下载PDF",
+      shareRecord: "分享记录"
+    }
+  };
+
+  // Get language from URL parameter
+  function getLanguageFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const lang = urlParams.get('lang');
+    return lang && translations[lang] ? lang : 'ENGLISH';
+  }
+
+  // Apply translations
+  function applyTranslations(language) {
+    const translation = translations[language];
+    if (!translation) return;
+
+    // Update document title
+    document.title = translation.pageTitle;
+
+    // Update all elements with data-translate attribute
+    document.querySelectorAll('[data-translate]').forEach(element => {
+      const key = element.getAttribute('data-translate');
+      if (translation[key]) {
+        element.textContent = translation[key];
+      }
+    });
+
+    // Update language selector
+    document.getElementById('languageSelect').value = language;
+  }
+
+  // Change language function
+  function changeLanguage(language) {
+    const url = new URL(window.location);
+    url.searchParams.set('lang', language);
+    window.location.href = url.toString();
+  }
+
+  // Initialize page
+  document.addEventListener('DOMContentLoaded', function() {
+    const currentLanguage = getLanguageFromUrl();
+    applyTranslations(currentLanguage);
+  });
+</script>
+</body>
+</html>

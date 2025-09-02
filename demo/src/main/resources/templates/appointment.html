@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="pageTitle">Book Appointment - Q-Care</title>
+    <link rel="stylesheet" href="/css/appointment.css">
+</head>
+<body>
+<div class="container">
+    Header
+    <header class="header">
+        <div class="header-content">
+            <button class="back-btn" onclick="history.back()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 100 100">
+                    <path d="M50 15 C30 15, 15 30, 15 50 C15 70, 30 85, 50 85 C70 85, 85 70, 85 50 C85 30, 70 15, 50 15 Z" fill="#164e63"/>
+                    <path d="M35 45 L50 30 L65 45 L50 60 Z" fill="white"/>
+                    <circle cx="50" cy="50" r="8" fill="white"/>
+                </svg>
+                <span>Q-Care</span>
+            </div>
+            Added language selector
+            <select id="languageSelect" onchange="changeLanguage()" style="padding: 0.5rem; border-radius: 0.5rem; border: 1px solid #e5e7eb; background: white; color: #164e63;">
+                <option value="ENGLISH">EN</option>
+                <option value="KOREAN">한국어</option>
+                <option value="JAPANESE">日本語</option>
+                <option value="CHINESE">中文</option>
+            </select>
+        </div>
+    </header>
+
+    Main Content
+    <main class="main-content">
+        <div class="page-title">
+            <h1 data-translate="pageTitle">Book Appointment</h1>
+            <p data-translate="pageSubtitle">Select a hospital, date, and time for your appointment</p>
+        </div>
+
+        <form id="appointmentForm" action="/patient/appointment" method="POST">
+            Hospital Selection
+            <section class="form-section">
+                <h2 data-translate="selectHospital">Select Hospital</h2>
+                <div class="hospital-list" id="hospitalList">
+                    Hospitals will be populated by JavaScript
+                </div>
+                <input type="hidden" name="hospitalId" id="selectedHospitalId">
+            </section>
+
+            Date Selection
+            <section class="form-section">
+                <h2 data-translate="selectDate">Select Date</h2>
+                <div class="date-picker">
+                    <input type="date" name="date" id="appointmentDate" required min="" class="date-input">
+                </div>
+            </section>
+
+            Time Selection
+            <section class="form-section">
+                <h2 data-translate="selectTime">Select Time</h2>
+                <div class="time-slots" id="timeSlots">
+                    Time slots will be populated by JavaScript
+                </div>
+                <input type="hidden" name="time" id="selectedTime">
+            </section>
+
+            Submit Button
+            <div class="form-actions">
+                <button type="submit" class="submit-btn" id="submitBtn" disabled>
+                    <span data-translate="bookAppointment">Book Appointment</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </main>
+</div>
+
+<script>
+    const translations = {
+        ENGLISH: {
+            pageTitle: "Book Appointment - Q-Care",
+            pageSubtitle: "Select a hospital, date, and time for your appointment",
+            selectHospital: "Select Hospital",
+            selectDate: "Select Date",
+            selectTime: "Select Time",
+            bookAppointment: "Book Appointment",
+            location: "Location",
+            weekendService: "Weekend Service Available",
+            weekendClosed: "Closed on Weekends",
+            // Medical specialties
+            INTERNAL_MEDICINE: "Internal Medicine",
+            FAMILY_MEDICINE: "Family Medicine",
+            PEDIATRICS: "Pediatrics",
+            SURGERY: "Surgery",
+            ORTHOPEDICS: "Orthopedics",
+            NEUROLOGY: "Neurology",
+            PSYCHIATRY: "Psychiatry",
+            DERMATOLOGY: "Dermatology",
+            OPHTHALMOLOGY: "Ophthalmology",
+            ENT: "ENT",
+            UROLOGY: "Urology",
+            GYNECOLOGY: "Gynecology",
+            CARDIOLOGY: "Cardiology",
+            EMERGENCY: "Emergency",
+            RADIOLOGY: "Radiology",
+            ANESTHESIOLOGY: "Anesthesiology"
+        },
+        KOREAN: {
+            pageTitle: "예약하기 - Q-Care",
+            pageSubtitle: "병원, 날짜, 시간을 선택하여 예약하세요",
+            selectHospital: "병원 선택",
+            selectDate: "날짜 선택",
+            selectTime: "시간 선택",
+            bookAppointment: "예약하기",
+            location: "위치",
+            weekendService: "주말 진료 가능",
+            weekendClosed: "주말 휴진",
+            // Medical specialties
+            INTERNAL_MEDICINE: "내과",
+            FAMILY_MEDICINE: "가정의학과",
+            PEDIATRICS: "소아청소년과",
+            SURGERY: "외과",
+            ORTHOPEDICS: "정형외과",
+            NEUROLOGY: "신경과",
+            PSYCHIATRY: "정신건강의학과",
+            DERMATOLOGY: "피부과",
+            OPHTHALMOLOGY: "안과",
+            ENT: "이비인후과",
+            UROLOGY: "비뇨의학과",
+            GYNECOLOGY: "산부인과",
+            CARDIOLOGY: "심장내과",
+            EMERGENCY: "응급의학과",
+            RADIOLOGY: "영상의학과",
+            ANESTHESIOLOGY: "마취통증의학과"
+        },
+        JAPANESE: {
+            pageTitle: "予約する - Q-Care",
+            pageSubtitle: "病院、日付、時間を選択して予約してください",
+            selectHospital: "病院を選択",
+            selectDate: "日付を選択",
+            selectTime: "時間を選択",
+            bookAppointment: "予約する",
+            location: "場所",
+            weekendService: "週末診療可能",
+            weekendClosed: "週末休診",
+            // Medical specialties
+            INTERNAL_MEDICINE: "内科",
+            FAMILY_MEDICINE: "家庭医学科",
+            PEDIATRICS: "小児科",
+            SURGERY: "外科",
+            ORTHOPEDICS: "整形外科",
+            NEUROLOGY: "神経科",
+            PSYCHIATRY: "精神科",
+            DERMATOLOGY: "皮膚科",
+            OPHTHALMOLOGY: "眼科",
+            ENT: "耳鼻咽喉科",
+            UROLOGY: "泌尿器科",
+            GYNECOLOGY: "産婦人科",
+            CARDIOLOGY: "循環器科",
+            EMERGENCY: "救急科",
+            RADIOLOGY: "放射線科",
+            ANESTHESIOLOGY: "麻酔科"
+        },
+        CHINESE: {
+            pageTitle: "预约挂号 - Q-Care",
+            pageSubtitle: "选择医院、日期和时间进行预约",
+            selectHospital: "选择医院",
+            selectDate: "选择日期",
+            selectTime: "选择时间",
+            bookAppointment: "预约挂号",
+            location: "位置",
+            weekendService: "周末可诊",
+            weekendClosed: "周末休诊",
+            // Medical specialties
+            INTERNAL_MEDICINE: "内科",
+            FAMILY_MEDICINE: "全科医学",
+            PEDIATRICS: "儿科",
+            SURGERY: "外科",
+            ORTHOPEDICS: "骨科",
+            NEUROLOGY: "神经科",
+            PSYCHIATRY: "精神科",
+            DERMATOLOGY: "皮肤科",
+            OPHTHALMOLOGY: "眼科",
+            ENT: "耳鼻喉科",
+            UROLOGY: "泌尿科",
+            GYNECOLOGY: "妇产科",
+            CARDIOLOGY: "心内科",
+            EMERGENCY: "急诊科",
+            RADIOLOGY: "影像科",
+            ANESTHESIOLOGY: "麻醉科"
+        }
+    };
+
+    const hospitals = [
+        {
+            hospitalId: 1,
+            name: "Seoul National University Hospital",
+            location: "Jongno-gu, Seoul",
+            specialties: ["INTERNAL_MEDICINE", "CARDIOLOGY", "NEUROLOGY", "SURGERY", "ORTHOPEDICS"],
+            holidayService: true
+        },
+        {
+            hospitalId: 2,
+            name: "Asan Medical Center",
+            location: "Songpa-gu, Seoul",
+            specialties: ["SURGERY", "ORTHOPEDICS", "PEDIATRICS", "GYNECOLOGY", "EMERGENCY"],
+            holidayService: false
+        },
+        {
+            hospitalId: 3,
+            name: "Samsung Medical Center",
+            location: "Gangnam-gu, Seoul",
+            specialties: ["DERMATOLOGY", "PSYCHIATRY", "OPHTHALMOLOGY", "ENT", "RADIOLOGY"],
+            holidayService: true
+        }
+    ];
+
+    const timeSlots = [
+        "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
+        "14:00", "14:30", "15:00", "15:30", "16:00", "16:30"
+    ];
+
+    let currentLanguage = 'ENGLISH';
+
+    function getLanguageFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('lang') || 'ENGLISH';
+    }
+
+    function changeLanguage() {
+        const select = document.getElementById('languageSelect');
+        currentLanguage = select.value;
+
+        // Update URL
+        const url = new URL(window.location);
+        url.searchParams.set('lang', currentLanguage);
+        window.history.replaceState({}, '', url);
+
+        applyTranslations();
+        renderHospitals();
+    }
+
+    function applyTranslations() {
+        const elements = document.querySelectorAll('[data-translate]');
+        elements.forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (translations[currentLanguage] && translations[currentLanguage][key]) {
+                element.textContent = translations[currentLanguage][key];
+            }
+        });
+    }
+
+    function renderHospitals() {
+        const hospitalList = document.getElementById('hospitalList');
+        hospitalList.innerHTML = '';
+
+        hospitals.forEach(hospital => {
+            const card = document.createElement('div');
+            card.className = 'hospital-card';
+            card.dataset.hospitalId = hospital.hospitalId;
+
+            const specialtyTags = hospital.specialties.slice(0, 3).map(specialty => {
+                const translatedName = translations[currentLanguage][specialty] || specialty;
+                return `<span class="specialty-tag">${translatedName}</span>`;
+            }).join('');
+
+            const moreCount = hospital.specialties.length > 3 ? hospital.specialties.length - 3 : 0;
+            const moreTag = moreCount > 0 ? `<span class="specialty-tag">+${moreCount} more</span>` : '';
+
+            card.innerHTML = `
+                <div class="hospital-info">
+                    <h3>${hospital.name}</h3>
+                    <div class="hospital-details">
+                        <span class="location">📍 ${hospital.location}</span>
+                        <span class="${hospital.holidayService ? 'weekend-service' : 'weekend-closed'}">
+                            🕒 ${translations[currentLanguage][hospital.holidayService ? 'weekendService' : 'weekendClosed']}
+                        </span>
+                    </div>
+                    <div class="specialties">
+                        ${specialtyTags}
+                        ${moreTag}
+                    </div>
+                </div>
+                <div class="hospital-select">
+                    <div class="radio-button"></div>
+                </div>
+            `;
+
+            card.addEventListener('click', function() {
+                selectHospital(hospital.hospitalId, this);
+            });
+
+            hospitalList.appendChild(card);
+        });
+    }
+
+    function renderTimeSlots() {
+        const timeSlotsContainer = document.getElementById('timeSlots');
+        timeSlotsContainer.innerHTML = '';
+
+        timeSlots.forEach(time => {
+            const slot = document.createElement('button');
+            slot.type = 'button';
+            slot.className = 'time-slot';
+            slot.dataset.time = time;
+            slot.textContent = time;
+
+            slot.addEventListener('click', function() {
+                selectTime(time, this);
+            });
+
+            timeSlotsContainer.appendChild(slot);
+        });
+    }
+
+    // Hospital selection function
+    function selectHospital(hospitalId, cardElement) {
+        // Remove previous selection
+        document.querySelectorAll('.hospital-card').forEach(card => {
+            card.classList.remove('selected');
+        });
+
+        // Add selection to clicked card
+        cardElement.classList.add('selected');
+
+        // Set hidden input value
+        document.getElementById('selectedHospitalId').value = hospitalId;
+
+        checkFormCompletion();
+    }
+
+    // Time selection function
+    function selectTime(time, slotElement) {
+        // Remove previous selection
+        document.querySelectorAll('.time-slot').forEach(slot => {
+            slot.classList.remove('selected');
+        });
+
+        // Add selection to clicked slot
+        slotElement.classList.add('selected');
+
+        // Set hidden input value
+        document.getElementById('selectedTime').value = time;
+
+        checkFormCompletion();
+    }
+
+    // Date selection listener
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('appointmentDate').addEventListener('change', checkFormCompletion);
+    });
+
+    // Check if form is complete
+    function checkFormCompletion() {
+        const hospitalId = document.getElementById('selectedHospitalId').value;
+        const date = document.getElementById('appointmentDate').value;
+        const time = document.getElementById('selectedTime').value;
+
+        const submitBtn = document.getElementById('submitBtn');
+
+        if (hospitalId && date && time) {
+            submitBtn.disabled = false;
+            submitBtn.classList.add('enabled');
+        } else {
+            submitBtn.disabled = true;
+            submitBtn.classList.remove('enabled');
+        }
+    }
+
+    function initializePage() {
+        // Set minimum date to today
+        document.getElementById('appointmentDate').min = new Date().toISOString().split('T')[0];
+
+        // Get language from URL and set selector
+        currentLanguage = getLanguageFromURL();
+        document.getElementById('languageSelect').value = currentLanguage;
+
+        // Apply translations and render content
+        applyTranslations();
+        renderHospitals();
+        renderTimeSlots();
+    }
+
+    // Form submission validation
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            const hospitalId = document.getElementById('selectedHospitalId').value;
+            const date = document.getElementById('appointmentDate').value;
+            const time = document.getElementById('selectedTime').value;
+
+            if (!hospitalId || !date || !time) {
+                e.preventDefault();
+                alert('Please select a hospital, date, and time for your appointment.');
+            }
+        });
+
+        // Initialize page
+        initializePage();
+    });
+</script>
+</body>
+</html>

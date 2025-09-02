@@ -1,0 +1,338 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #ffffff;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+/* Header */
+.header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #164e63;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.back-btn:hover {
+    background-color: #ecfeff;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #164e63;
+}
+
+.header-spacer {
+    width: 40px;
+}
+
+/* Main content */
+.main-content {
+    padding: 1.5rem;
+}
+
+.page-title {
+    margin-bottom: 2rem;
+}
+
+.page-title h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #164e63;
+    margin-bottom: 0.5rem;
+}
+
+.page-title p {
+    color: #64748b;
+    font-size: 1rem;
+}
+
+/* Form sections */
+.form-section {
+    margin-bottom: 2rem;
+}
+
+.form-section h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #164e63;
+    margin-bottom: 1rem;
+}
+
+/* Hospital cards */
+.hospital-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.hospital-card {
+    background-color: #ecfeff;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hospital-card:hover {
+    border-color: #164e63;
+    box-shadow: 0 4px 12px rgba(22, 78, 99, 0.1);
+}
+
+.hospital-card.selected {
+    border-color: #164e63;
+    background-color: #cffafe;
+    box-shadow: 0 4px 12px rgba(22, 78, 99, 0.15);
+}
+
+.hospital-info {
+    flex: 1;
+}
+
+.hospital-info h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #164e63;
+    margin-bottom: 0.5rem;
+}
+
+.hospital-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.location,
+.weekend-service,
+.weekend-closed {
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+.weekend-service {
+    color: #059669;
+}
+
+.weekend-closed {
+    color: #dc2626;
+}
+
+.specialties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.specialty-tag {
+    background-color: #164e63;
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 1rem;
+    font-weight: 500;
+}
+
+.hospital-select {
+    margin-left: 1rem;
+}
+
+.radio-button {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #d1d5db;
+    border-radius: 50%;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.hospital-card.selected .radio-button {
+    border-color: #164e63;
+    background-color: #164e63;
+}
+
+.hospital-card.selected .radio-button::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+/* Date picker */
+.date-picker {
+    margin-bottom: 1rem;
+}
+
+.date-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background-color: #ffffff;
+    color: #475569;
+    transition: border-color 0.2s;
+}
+
+.date-input:focus {
+    outline: none;
+    border-color: #164e63;
+    box-shadow: 0 0 0 3px rgba(22, 78, 99, 0.1);
+}
+
+/* Time slots */
+.time-slots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.time-slot {
+    background-color: #ecfeff;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #164e63;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.time-slot:hover {
+    border-color: #164e63;
+    background-color: #cffafe;
+}
+
+.time-slot.selected {
+    background-color: #164e63;
+    border-color: #164e63;
+    color: white;
+}
+
+/* Form actions */
+.form-actions {
+    margin-top: 2rem;
+    padding-top: 1rem;
+}
+
+.submit-btn {
+    width: 100%;
+    background-color: #9ca3af;
+    color: white;
+    border: none;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: not-allowed;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.submit-btn.enabled {
+    background-color: #164e63;
+    cursor: pointer;
+}
+
+.submit-btn.enabled:hover {
+    background-color: #0f3a47;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(22, 78, 99, 0.3);
+}
+
+.submit-btn:disabled {
+    opacity: 0.6;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .main-content {
+        padding: 1rem;
+    }
+
+    .time-slots {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hospital-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .hospital-select {
+        margin-left: 0;
+        align-self: flex-end;
+    }
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Success states */
+.success-message {
+    background-color: #d1fae5;
+    border: 1px solid #a7f3d0;
+    color: #065f46;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.success-message.show {
+    display: block;
+}

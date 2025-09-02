@@ -1,4 +1,4 @@
-package com.q_care.demo.patient;
+package com.q_care.demo.patient.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

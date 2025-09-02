@@ -1,5 +1,6 @@
-package com.q_care.demo.patient;
+package com.q_care.demo.patient.dto;
 
+import com.q_care.demo.patient.entity.Patients;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

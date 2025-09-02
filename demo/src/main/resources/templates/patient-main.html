@@ -119,6 +119,15 @@
         if (section === 'symptoms') {
             window.location.href = '/patient/symptom';
         }
+        else if(section === 'booking'){
+            window.location.href = '/patient/appointment1'
+        }
+        else if(section === 'history'){
+            window.location.href = '/patient/prescription-list1'
+        }
+        else if(section === 'hospital'){
+            window.location.href = '/patient/nearby-hospital1'
+        }
         // 여기에 다른것도 추가
 
         toggleMenu(); // 기존처럼 메뉴 닫기 유지
@@ -222,6 +231,7 @@
         document.querySelector(".nav-item:nth-child(2) span").textContent = t.bookAppointment;
         document.querySelector(".nav-item:nth-child(3) span").textContent = t.checkAppointments;
         document.querySelector(".nav-item:nth-child(4) span").textContent = t.history;
+        document.querySelector(".nav-item:nth-child(5) span").textContent = t.hospital;
 
         document.getElementById("symptom-search-title").textContent = t.symptomSearch;
         document.getElementById("upcoming-appointments-title").textContent = t.upcomingAppointments;

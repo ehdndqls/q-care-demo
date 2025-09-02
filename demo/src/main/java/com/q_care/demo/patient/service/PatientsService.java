@@ -1,5 +1,8 @@
-package com.q_care.demo.patient;
+package com.q_care.demo.patient.service;
 
+import com.q_care.demo.patient.dto.PatientsForm;
+import com.q_care.demo.patient.entity.Patients;
+import com.q_care.demo.patient.repository.PatientsRepository;
 import com.q_care.demo.user.CustomUserDetails;
 import com.q_care.demo.user.User;
 import com.q_care.demo.user.UserRepository;

@@ -1,8 +1,8 @@
 package com.q_care.demo.user;
 
-import com.q_care.demo.patient.PatientsForm;
-import com.q_care.demo.patient.PatientsRepository;
-import com.q_care.demo.patient.PatientsService;
+import com.q_care.demo.patient.dto.PatientsForm;
+import com.q_care.demo.patient.repository.PatientsRepository;
+import com.q_care.demo.patient.service.PatientsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
