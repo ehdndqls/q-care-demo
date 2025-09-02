@@ -1,10 +1,224 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q-Care - Patient Dashboard</title>
+    <link rel="stylesheet" href="/css/patient-main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-환자메인페이지
+<!-- Header -->
+<header class="header">
+    <div class="header-content">
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <path d="M16 2C12.5 2 9.5 4.5 9.5 7.5C9.5 10.5 12.5 13 16 13C19.5 13 22.5 10.5 22.5 7.5C22.5 4.5 19.5 2 16 2Z" fill="#059669"/>
+                <path d="M16 15C10 15 5 18 5 22V28C5 29 6 30 7 30H25C26 30 27 29 27 28V22C27 18 22 15 16 15Z" fill="#059669"/>
+                <circle cx="16" cy="8" r="3" fill="white"/>
+                <text x="16" y="12" text-anchor="middle" fill="white" font-size="8" font-weight="bold">Q</text>
+            </svg>
+            <span class="logo-text">Q-care</span>
+        </div>
+        <button class="menu-btn" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>
+
+<!-- Navigation Menu -->
+<nav class="nav-menu" id="navMenu">
+    <div class="nav-item" onclick="navigateTo('symptoms')"><span>Symptom Search</span></div>
+    <div class="nav-item" onclick="navigateTo('booking')"><span>Book Appointment</span></div>
+    <div class="nav-item" onclick="navigateTo('appointments')"><span>Check Appointments</span></div>
+    <div class="nav-item" onclick="navigateTo('history')"><span>Medical History & Prescriptions</span></div>
+    <div class="nav-item" onclick="navigateTo('hospital')"><span>Nearby Hospital</span></div>
+</nav>
+
+<!-- Main Content -->
+<main class="main-content">
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+        <h1 class="welcome-title" id="welcome-title-text">
+            Hello, <span th:text="${patient.firstName} + ' ' + ${patient.lastName}"></span>!
+        </h1>
+        <p class="welcome-subtitle" id="welcome-subtitle-text">How can we help you today?</p>
+    </section>
+
+    <!-- Symptom Search -->
+    <section class="symptom-search-section">
+        <h2 class="section-title" id="symptom-search-title">Symptom Search</h2>
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Describe your symptoms..." id="symptomInput">
+            <button class="search-btn" onclick="searchSymptoms()">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M19 19L13 13M15 8C15 11.866 11.866 15 8 15C4.134 15 1 11.866 1 8C1 4.134 4.134 1 8 1C11.866 1 15 4.134 15 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- Upcoming Appointments -->
+    <section class="appointments-section">
+        <h2 class="section-title" id="upcoming-appointments-title">Upcoming Appointments</h2>
+        <div class="appointment-card">
+            <div class="appointment-date"><div class="date-day">15</div><div class="date-month">Dec</div></div>
+            <div class="appointment-details">
+                <h3 class="appointment-title">General Checkup</h3>
+                <p class="appointment-doctor">Dr. Kim Min-jun</p>
+                <p class="appointment-time">2:30 PM - Seoul National Hospital</p>
+            </div>
+            <div class="appointment-status"><span class="status-confirmed">Confirmed</span></div>
+        </div>
+
+        <div class="appointment-card">
+            <div class="appointment-date"><div class="date-day">22</div><div class="date-month">Dec</div></div>
+            <div class="appointment-details">
+                <h3 class="appointment-title">Dental Cleaning</h3>
+                <p class="appointment-doctor">Dr. Lee So-young</p>
+                <p class="appointment-time">10:00 AM - Gangnam Dental Clinic</p>
+            </div>
+            <div class="appointment-status"><span class="status-pending">Pending</span></div>
+        </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions-section">
+        <h2 class="section-title" id="quick-actions-title">Quick Actions</h2>
+        <div class="actions-grid">
+            <div class="action-card" onclick="navigateTo('emergency')"><div class="action-icon emergency">🚨</div><h3 class="action-title" id="emergency-title">Emergency</h3><p class="action-desc">24/7 Emergency Services</p></div>
+            <div class="action-card" onclick="navigateTo('pharmacy')"><div class="action-icon pharmacy">💊</div><h3 class="action-title" id="pharmacy-title">Pharmacy</h3><p class="action-desc">Find Nearby Pharmacies</p></div>
+            <div class="action-card" onclick="navigateTo('insurance')"><div class="action-icon insurance">🛡️</div><h3 class="action-title" id="insurance-title">Insurance</h3><p class="action-desc">Check Coverage</p></div>
+            <div class="action-card" onclick="navigateTo('translator')"><div class="action-icon translator">🌐</div><h3 class="action-title" id="translator-title">Translator</h3><p class="action-desc">Medical Translation</p></div>
+        </div>
+    </section>
+
+    <!-- Insurance Help Banner -->
+    <section class="insurance-banner">
+        <div class="banner-content">
+            <div class="banner-icon">📞</div>
+            <div class="banner-text">
+                <h3 id="insurance-help-title">Need Insurance Help?</h3>
+                <p id="insurance-org">Foreign Workers' Association</p>
+                <a href="tel:010-0000-0000" class="banner-phone">010-0000-0000</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    // 메뉴 토글
+    function toggleMenu() {
+        document.getElementById('navMenu').classList.toggle('active');
+    }
+    function navigateTo(section) { console.log('Navigating to:', section); toggleMenu(); }
+    function searchSymptoms() {
+        const symptoms = document.getElementById('symptomInput').value.trim();
+        if (symptoms) console.log('Searching for symptoms:', symptoms);
+    }
+
+    // 다국어 번역
+    const translations = {
+        ENGLISH: {
+            welcomeTitle: "Hello, {name}!",
+            welcomeSubtitle: "How can we help you today?",
+            symptomSearch: "Symptom Search",
+            bookAppointment: "Book Appointment",
+            checkAppointments: "Check Appointments",
+            history: "Medical History & Prescriptions",
+            upcomingAppointments: "Upcoming Appointments",
+            quickActions: "Quick Actions",
+            emergency: "Emergency",
+            pharmacy: "Pharmacy",
+            insurance: "Insurance",
+            translator: "Translator",
+            insuranceHelp: "Need Insurance Help?",
+            insuranceOrg: "Foreign Workers' Association"
+        },
+        KOREAN: {
+            welcomeTitle: "안녕하세요, {name} 님!",
+            welcomeSubtitle: "오늘 무엇을 도와드릴까요?",
+            symptomSearch: "증상 검색",
+            bookAppointment: "예약하기",
+            checkAppointments: "예약 확인",
+            history: "진료 기록 및 처방전",
+            upcomingAppointments: "다가오는 예약",
+            quickActions: "빠른 실행",
+            emergency: "응급실",
+            pharmacy: "약국",
+            insurance: "보험",
+            translator: "번역 서비스",
+            insuranceHelp: "보험 상담이 필요하신가요?",
+            insuranceOrg: "외국인 근로자 협회"
+        },
+        JAPANESE: {
+            welcomeTitle: "こんにちは、{name}さん！",
+            welcomeSubtitle: "今日は何をお手伝いしましょうか？",
+            symptomSearch: "症状検索",
+            bookAppointment: "予約する",
+            checkAppointments: "予約確認",
+            history: "診療記録と処方箋",
+            upcomingAppointments: "今後の予約",
+            quickActions: "クイック操作",
+            emergency: "救急",
+            pharmacy: "薬局",
+            insurance: "保険",
+            translator: "翻訳サービス",
+            insuranceHelp: "保険のサポートが必要ですか？",
+            insuranceOrg: "外国人労働者協会"
+        },
+        CHINESE: {
+            welcomeTitle: "您好，{name}！",
+            welcomeSubtitle: "今天我们能帮您什么？",
+            symptomSearch: "症状查询",
+            bookAppointment: "预约",
+            checkAppointments: "查看预约",
+            history: "病历与处方",
+            upcomingAppointments: "即将到来的预约",
+            quickActions: "快捷操作",
+            emergency: "急诊",
+            pharmacy: "药店",
+            insurance: "保险",
+            translator: "翻译服务",
+            insuranceHelp: "需要保险帮助吗？",
+            insuranceOrg: "外国劳工协会"
+        }
+    };
+
+    function getLang() {
+        return new URLSearchParams(window.location.search).get("lang")?.toUpperCase() || "ENGLISH";
+    }
+
+    function applyTranslations() {
+        const lang = getLang();
+        const t = translations[lang] || translations.ENGLISH;
+
+        const patientName = document.querySelector(".welcome-title span").textContent;
+
+        document.getElementById("welcome-title-text").textContent = t.welcomeTitle.replace("{name}", patientName);
+        document.getElementById("welcome-subtitle-text").textContent = t.welcomeSubtitle;
+
+        document.querySelector(".nav-item:nth-child(1) span").textContent = t.symptomSearch;
+        document.querySelector(".nav-item:nth-child(2) span").textContent = t.bookAppointment;
+        document.querySelector(".nav-item:nth-child(3) span").textContent = t.checkAppointments;
+        document.querySelector(".nav-item:nth-child(4) span").textContent = t.history;
+
+        document.getElementById("symptom-search-title").textContent = t.symptomSearch;
+        document.getElementById("upcoming-appointments-title").textContent = t.upcomingAppointments;
+        document.getElementById("quick-actions-title").textContent = t.quickActions;
+
+        document.getElementById("emergency-title").textContent = t.emergency;
+        document.getElementById("pharmacy-title").textContent = t.pharmacy;
+        document.getElementById("insurance-title").textContent = t.insurance;
+        document.getElementById("translator-title").textContent = t.translator;
+
+        document.getElementById("insurance-help-title").textContent = t.insuranceHelp;
+        document.getElementById("insurance-org").textContent = t.insuranceOrg;
+    }
+
+    document.addEventListener("DOMContentLoaded", applyTranslations);
+</script>
 </body>
 </html>

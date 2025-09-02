@@ -38,21 +38,52 @@ public class Hospitals {
 
 
     public enum MedicalSpecialty {
+        /** 내과 */
         INTERNAL_MEDICINE,
+
+        /** 가정의학과 */
         FAMILY_MEDICINE,
+
+        /** 소아청소년과 */
         PEDIATRICS,
+
+        /** 피부과 */
         DERMATOLOGY,
+
+        /** 정신건강의학과 */
         PSYCHIATRY,
+
+        /** 일반외과 */
         SURGERY,
+
+        /** 정형외과 */
         ORTHOPEDIC_SURGERY,
+
+        /** 신경외과 */
         NEUROSURGERY,
+
+        /** 성형외과 */
         PLASTIC_SURGERY,
+
+        /** 마취통증의학과 */
         ANESTHESIOLOGY,
+
+        /** 재활의학과 */
         REHABILITATION,
+
+        /** 안과 */
         OPHTHALMOLOGY,
+
+        /** 이비인후과 */
         OTOLARYNGOLOGY,
+
+        /** 산부인과 */
         OBSTETRICS_GYNECOLOGY,
+
+        /** 비뇨의학과 (비뇨기과) */
         UROLOGY,
+
+        /** 신경과 */
         NEUROLOGY
     }
 

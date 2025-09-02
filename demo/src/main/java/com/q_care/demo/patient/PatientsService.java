@@ -1,8 +1,10 @@
 package com.q_care.demo.patient;
 
+import com.q_care.demo.user.CustomUserDetails;
 import com.q_care.demo.user.User;
 import com.q_care.demo.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,5 +43,20 @@ public class PatientsService {
         user.setRole(User.Role.PATIENT);
         user.setRefId(patient.getPatientId());
         userRepository.save(user);
+    }
+
+    public String getLang(String username){
+        Patients patient = patientsRepository.findByEmail(username).orElse(null);
+
+        return patient.getLanguage().toString();
+    }
+
+    public String getUserEmail(Authentication authentication) {
+        if (authentication == null || !(authentication.getPrincipal() instanceof CustomUserDetails)) {
+            throw new IllegalStateException("유효하지 않은 인증 정보입니다.");
+        }
+
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        return userDetails.getUsername();
     }
 }
