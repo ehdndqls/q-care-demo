@@ -21,6 +21,7 @@ class SecurityConfig {
                         .requestMatchers("/hospital/**").hasRole("HOSPITAL")
                         .requestMatchers("/patient/**").hasRole("PATIENT")
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/join", "/request-join", "/language").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

@@ -39,17 +39,15 @@ public class BasicController {
         return "main.html";
     }
 
-    @PostMapping("/select-language")
-    @ResponseBody
-    public String selectLanguage(@RequestParam("language") String language){
-        // 사용자가 선택한 언어에 따라 join 페이지로 리다이렉트
-        return "redirect:/patients/join?language=" + language;
+    @GetMapping("/language")
+    public String language(){
+        return "language.html";
     }
 
     // 회원가입 페이지
     @GetMapping("/join")
-    public String join(@RequestParam(value = "language", required = true) String language, Model model){
-        model.addAttribute("language", language);
+    public String join(@RequestParam(value = "lang", required = true) String language, Model model){
+        model.addAttribute("lang", language);
         return "join.html";
     }
 

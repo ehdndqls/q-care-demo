@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q-Care - Select Language</title>
+    <link rel="stylesheet" href="/css/language.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 2C28.284 2 35 8.716 35 17C35 21.418 33.314 25.426 30.5 28.25L20 38L9.5 28.25C6.686 25.426 5 21.418 5 17C5 8.716 11.716 2 20 2Z" fill="#10B981"/>
+                <text x="20" y="22" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Q</text>
+            </svg>
+            <span class="logo-text">Q-care</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1 class="title">Select Your Language</h1>
+        <p class="subtitle">Choose your preferred language to continue</p>
+
+        <div class="language-list">
+            <button class="language-item" data-lang="KOREAN">
+                <span class="language-name">한국어</span>
+                <span class="arrow">→</span>
+            </button>
+
+            <button class="language-item" data-lang="ENGLISH">
+                <span class="language-name">English</span>
+                <span class="arrow">→</span>
+            </button>
+
+            <button class="language-item" data-lang="JAPANESE">
+                <span class="language-name">日本語</span>
+                <span class="arrow">→</span>
+            </button>
+
+            <button class="language-item" data-lang="CHINESE">
+                <span class="language-name">中文</span>
+                <span class="arrow">→</span>
+            </button>
+
+            <button class="language-item" data-lang="FRENCH">
+                <span class="language-name">Français</span>
+                <span class="arrow">→</span>
+            </button>
+
+            <button class="language-item" data-lang="GERMAN">
+                <span class="language-name">Deutsch</span>
+                <span class="arrow">→</span>
+            </button>
+
+            <button class="language-item" data-lang="SPANISH">
+                <span class="language-name">Español</span>
+                <span class="arrow">→</span>
+            </button>
+
+            <button class="language-item" data-lang="RUSSIAN">
+                <span class="language-name">Русский</span>
+                <span class="arrow">→</span>
+            </button>
+
+            <button class="language-item" data-lang="ARABIC">
+                <span class="language-name">العربية</span>
+                <span class="arrow">→</span>
+            </button>
+
+            <button class="language-item" data-lang="HINDI">
+                <span class="language-name">हिन्दी</span>
+                <span class="arrow">→</span>
+            </button>
+
+            <button class="language-item" data-lang="PORTUGUESE">
+                <span class="language-name">Português</span>
+                <span class="arrow">→</span>
+            </button>
+
+            <button class="language-item" data-lang="ITALIAN">
+                <span class="language-name">Italiano</span>
+                <span class="arrow">→</span>
+            </button>
+
+            <button class="language-item" data-lang="VIETNAMESE">
+                <span class="language-name">Tiếng Việt</span>
+                <span class="arrow">→</span>
+            </button>
+
+            <button class="language-item" data-lang="THAI">
+                <span class="language-name">ไทย</span>
+                <span class="arrow">→</span>
+            </button>
+
+            <button class="language-item" data-lang="TURKISH">
+                <span class="language-name">Türkçe</span>
+                <span class="arrow">→</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.language-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const selectedLang = this.dataset.lang;
+            console.log('Selected language:', selectedLang);
+            // 여기서 선택된 언어를 처리하거나 다음 페이지로 이동
+            window.location.href = `/join?lang=${selectedLang}`;
+        });
+    });
+</script>
+</body>
+</html>
