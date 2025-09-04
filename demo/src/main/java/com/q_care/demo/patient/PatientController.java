@@ -1,6 +1,7 @@
 package com.q_care.demo.patient;
 
 
+import com.q_care.demo.MailService;
 import com.q_care.demo.hospitals.HospitalRepository;
 import com.q_care.demo.hospitals.Hospitals;
 import com.q_care.demo.patient.entity.Appointment;
@@ -28,6 +29,7 @@ public class PatientController {
     private final PatientsRepository patientsRepository;
     private final HospitalRepository hospitalRepository;
     private final AppointmentRepository appointmentRepository;
+    private final MailService mailService;
 
     @GetMapping("/patient")
     public String patients(Authentication auth) {
@@ -85,8 +87,12 @@ public class PatientController {
         appointment.setHospitalId(hospital.getHospitalId());
         appointment.setDescription("(예시데이터) 머리가 욱신거리며(두통), 눈이 침침하고 집중력이 저하되는 증상이 나타납니다.");
         appointmentRepository.save(appointment);
-        return "redirect:/patient/appointment-list";
+
+        mailService.sendReservationMail(patient.getEmail(), patient.getFirstName() + patient.getLastName(), hospitalId, date, time);
+
+        return "redirect:/patient";
     }
+
 
     @GetMapping("/patient/prescription-list1")
     public String prescriptionList1(Authentication auth, Model model) {
@@ -113,5 +119,7 @@ public class PatientController {
     public String nearbyHospital(Authentication auth, Model model) {
         return "nearby-hospital.html";
     }
+
+
 
 }

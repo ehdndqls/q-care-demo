@@ -72,6 +72,15 @@
     </div>
 </div>
 
-
+<script>
+    // URL에 error 파라미터가 있으면 알림창 띄우기
+window.addEventListener("DOMContentLoaded", function () {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("error")) {
+        alert("아이디 혹은 비밀번호가 틀렸습니다.");
+    }
+});
+</script>
 </body>
+
 </html>

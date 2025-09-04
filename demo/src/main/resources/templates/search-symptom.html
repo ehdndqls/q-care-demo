@@ -109,43 +109,9 @@
     <h3 class="section-title" id="affected-title">Affected Body Areas</h3>
     <div class="body-diagram">
       <div class="body-visualization">
-        <svg viewBox="0 0 300 500" class="human-body-svg">
-          <!-- Head -->
-          <circle cx="150" cy="60" r="35" class="body-part affected" data-part="head" onclick="highlightArea('head')" />
-          <text x="150" y="65" text-anchor="middle" class="body-label">Head</text>
-
-          <!-- Neck -->
-          <rect x="140" y="90" width="20" height="25" class="body-part normal" data-part="neck" onclick="highlightArea('neck')" />
-
-          <!-- Chest/Torso -->
-          <ellipse cx="150" cy="160" rx="45" ry="60" class="body-part affected" data-part="chest" onclick="highlightArea('chest')" />
-          <text x="150" y="165" text-anchor="middle" class="body-label">Chest</text>
-
-          <!-- Arms -->
-          <ellipse cx="100" cy="140" rx="15" ry="40" class="body-part normal" data-part="left-arm" onclick="highlightArea('left-arm')" />
-          <ellipse cx="200" cy="140" rx="15" ry="40" class="body-part normal" data-part="right-arm" onclick="highlightArea('right-arm')" />
-
-          <!-- Abdomen -->
-          <ellipse cx="150" cy="240" rx="35" ry="30" class="body-part normal" data-part="abdomen" onclick="highlightArea('abdomen')" />
-
-          <!-- Legs -->
-          <ellipse cx="130" cy="340" rx="18" ry="70" class="body-part normal" data-part="left-leg" onclick="highlightArea('left-leg')" />
-          <ellipse cx="170" cy="340" rx="18" ry="70" class="body-part normal" data-part="right-leg" onclick="highlightArea('right-leg')" />
-
-          <!-- Temperature indicator for fever -->
-          <g class="temperature-indicator">
-            <rect x="200" y="50" width="8" height="30" fill="#ff4444" class="thermometer" />
-            <circle cx="204" cy="85" r="6" fill="#ff4444" />
-            <text x="220" y="70" class="temp-text">38.5°C</text>
-          </g>
-
-          <!-- Pain indicators -->
-          <g class="pain-indicators">
-            <!-- Head pain waves -->
-            <path d="M 120 40 Q 135 30 150 40 Q 165 30 180 40" stroke="#ff6b6b" stroke-width="2" fill="none" class="pain-wave" />
-            <path d="M 125 45 Q 140 35 155 45 Q 170 35 185 45" stroke="#ff6b6b" stroke-width="2" fill="none" class="pain-wave" />
-          </g>
-        </svg>
+        <div class="empty-space">
+          <p> 추후 증상 부위를 보여주는 시각 자료가 이곳에 표시됩니다.</p>
+        </div>
 
         <!-- Symptom severity indicators -->
         <div class="severity-indicators">
@@ -175,7 +141,7 @@
   <!-- Action Buttons -->
   <section class="action-buttons">
     <button class="btn btn-secondary" id="search-other-btn">Search Other Symptoms</button>
-    <button class="btn btn-primary" id="find-hospitals-btn">Find Nearby Hospitals</button>
+    <button class="btn btn-primary" id="find-hospitals-btn">Save Current Symptoms</button>
   </section>
 </div>
 
@@ -234,7 +200,7 @@
       affectedLegend: '영향받는 부위',
       normalLegend: '정상',
       searchOtherBtn: '다른 증상 검색',
-      findHospitalsBtn: '근처 병원 찾기'
+      findHospitalsBtn: '현재 증상 저장'
     },
     JAPANESE: {
       searchResultsTitle: '"{keywords}" の検索結果',
@@ -261,7 +227,7 @@
       affectedLegend: '影響部位',
       normalLegend: '正常',
       searchOtherBtn: '他の症状を検索',
-      findHospitalsBtn: '近くの病院を探す'
+      findHospitalsBtn: '現在の症状を保存'
     },
     CHINESE: {
       searchResultsTitle: '"{keywords}" 搜索结果',
@@ -288,7 +254,7 @@
       affectedLegend: '影响区域',
       normalLegend: '正常',
       searchOtherBtn: '搜索其他症状',
-      findHospitalsBtn: '查找附近医院'
+      findHospitalsBtn: '保存当前症状'
     }
   };
 
@@ -296,7 +262,7 @@
     return new URLSearchParams(window.location.search).get("lang")?.toUpperCase() || "ENGLISH";
   }
 
-  function applyTranslations(keywords = 'Headache, Fever, Fatigue') {
+  function applyTranslations(keywords = 'AI 모델을 학습시켜 사용자가 검색한 키워드를 토대로 증상 예측 기능 구현 예정, 아래 증상 저장버튼을 누르면 해당 증상에 맞는 병원 중 현재 사용자의 위치와 가장 가까운 병원부터 나열 된 예약 페이지로 이동') {
     const lang = getLang();
     const t = translations[lang] || translations.ENGLISH;
 

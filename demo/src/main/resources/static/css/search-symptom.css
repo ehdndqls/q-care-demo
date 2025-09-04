@@ -333,6 +333,21 @@ body {
     min-height: 52px;
 }
 
+.empty-space {
+    width: 100%;
+    height: 300px; /* 임시 크기 */
+    border: 2px dashed #bbb;
+    background-color: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 16px;
+    text-align: center;
+    font-style: italic;
+}
+
+
 .btn-primary {
     background-color: #164e63;
     color: #ffffff;
@@ -377,4 +392,6 @@ body {
     .confidence-bar {
         width: 100%;
     }
+
+
 }

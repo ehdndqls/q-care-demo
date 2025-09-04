@@ -13,10 +13,10 @@ body {
 
 /* Header */
 .header {
-    background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
     color: white;
     padding: 1rem 0;
-    box-shadow: 0 2px 10px rgba(8, 145, 178, 0.2);
+    box-shadow: 0 2px 10px rgba(5, 150, 105, 0.2);
 }
 
 .header-content {
@@ -60,7 +60,7 @@ body {
 }
 
 .language-selector select option {
-    background: #0891b2;
+    background: #059669;
     color: white;
 }
 
@@ -98,7 +98,7 @@ body {
 }
 
 .card-header {
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
     padding: 1.5rem;
     border-bottom: 1px solid #e2e8f0;
     display: flex;
@@ -113,7 +113,7 @@ body {
 }
 
 .visit-date {
-    background: #0891b2;
+    background: #059669;
     color: white;
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
@@ -134,7 +134,7 @@ body {
 }
 
 .prescription-count {
-    background: #10b981;
+    background: #059669;
     color: white;
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
@@ -211,7 +211,7 @@ body {
 
 .symptoms-list li::before {
     content: "•";
-    color: #0891b2;
+    color: #059669;
     font-weight: bold;
     position: absolute;
     left: 0;
@@ -257,7 +257,7 @@ body {
 }
 
 .duration {
-    color: #0891b2;
+    color: #059669;
     font-weight: 500;
     font-size: 0.875rem;
 }
@@ -281,7 +281,7 @@ body {
 }
 
 .appointment-date {
-    background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
     color: white;
     padding: 1rem;
     border-radius: 0.75rem;
@@ -325,26 +325,26 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
     color: white;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(8, 145, 178, 0.3);
+    box-shadow: 0 8px 25px rgba(5, 150, 105, 0.3);
 }
 
 .btn-secondary {
     background: white;
-    color: #0891b2;
-    border: 2px solid #0891b2;
+    color: #059669;
+    border: 2px solid #059669;
 }
 
 .btn-secondary:hover {
-    background: #0891b2;
+    background: #059669;
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(8, 145, 178, 0.3);
+    box-shadow: 0 8px 25px rgba(5, 150, 105, 0.3);
 }
 
 /* Responsive Design */

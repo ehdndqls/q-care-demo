@@ -8,7 +8,6 @@
 </head>
 <body>
 <div class="container">
-    Header
     <header class="header">
         <div class="header-content">
             <button class="back-btn" onclick="history.back()">
@@ -24,8 +23,7 @@
                 </svg>
                 <span>Q-Care</span>
             </div>
-            Added language selector
-            <select id="languageSelect" onchange="changeLanguage()" style="padding: 0.5rem; border-radius: 0.5rem; border: 1px solid #e5e7eb; background: white; color: #164e63;">
+            <select id="languageSelect" onchange="changeLanguage()" style="padding: 0.5rem; border-radius: 0.5rem; border: 1px solid #e5e7eb; background: white; color: #10b981;">
                 <option value="ENGLISH">EN</option>
                 <option value="KOREAN">한국어</option>
                 <option value="JAPANESE">日本語</option>
@@ -34,7 +32,6 @@
         </div>
     </header>
 
-    Main Content
     <main class="main-content">
         <div class="page-title">
             <h1 data-translate="pageTitle">Book Appointment</h1>
@@ -42,7 +39,6 @@
         </div>
 
         <form id="appointmentForm" action="/patient/appointment" method="POST">
-            Hospital Selection
             <section class="form-section">
                 <h2 data-translate="selectHospital">Select Hospital</h2>
                 <div class="hospital-list" id="hospitalList">
@@ -51,7 +47,6 @@
                 <input type="hidden" name="hospitalId" id="selectedHospitalId">
             </section>
 
-            Date Selection
             <section class="form-section">
                 <h2 data-translate="selectDate">Select Date</h2>
                 <div class="date-picker">
@@ -59,7 +54,6 @@
                 </div>
             </section>
 
-            Time Selection
             <section class="form-section">
                 <h2 data-translate="selectTime">Select Time</h2>
                 <div class="time-slots" id="timeSlots">
@@ -68,7 +62,7 @@
                 <input type="hidden" name="time" id="selectedTime">
             </section>
 
-            Submit Button
+            예약하기 버튼 누르면 로그인한 계정으로 예약 됐다고 이메일 갑니다.
             <div class="form-actions">
                 <button type="submit" class="submit-btn" id="submitBtn" disabled>
                     <span data-translate="bookAppointment">Book Appointment</span>
